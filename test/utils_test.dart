@@ -138,8 +138,7 @@ void main() {
           final StringBuffer buffer = StringBuffer();
           for (int i = 0; i <= 9; i++) {
             buffer.write(i.toString());
-            expect(
-                colorFromHex(buffer.toString(), enableAlpha: false), (i == 7 || i == 5 || i == 2) ? isNot(null) : null);
+            expect(colorFromHex(buffer.toString(), enableAlpha: false), (i == 7 || i == 5 || i == 2) ? isNot(null) : null);
           }
         },
       );
@@ -193,11 +192,7 @@ void main() {
   });
 
   group('Test colorToHex:', () {
-    final Map<Color, String> colorsMap = {
-      const Color(0xffffffff): 'FFFFFF',
-      const Color(0x00000000): '000000',
-      const Color(0xF0F0F0F0): 'F0F0F0'
-    };
+    final Map<Color, String> colorsMap = {const Color(0xffffffff): 'FFFFFF', const Color(0x00000000): '000000', const Color(0xF0F0F0F0): 'F0F0F0'};
 
     colorsMap.forEach((color, string) {
       final String transparency = string.substring(4);
@@ -211,7 +206,7 @@ void main() {
       final String transparency = string.substring(4);
       test(
         'It should convert $color: to #${transparency + string} with hash',
-        () => expect(colorToHex(color, includeHashSign: true), '#' + transparency + string),
+        () => expect(colorToHex(color, includeHashSign: true), '#$transparency$string'),
       );
     });
 
@@ -219,8 +214,7 @@ void main() {
       final String transparency = string.substring(4).toLowerCase();
       test(
         'It should convert $color: to #${transparency + string.toLowerCase()}, with hash, to lower case',
-        () => expect(
-            colorToHex(color, includeHashSign: true, toUpperCase: false), '#' + transparency + string.toLowerCase()),
+        () => expect(colorToHex(color, includeHashSign: true, toUpperCase: false), '#$transparency${string.toLowerCase()}'),
       );
     });
 
@@ -244,8 +238,7 @@ void main() {
 
     colorsMap.forEach((color, string) => test(
           'It should convert $color: to #${string.toLowerCase()}, with alpha disabled and hash, to lower case',
-          () => expect(colorToHex(color, enableAlpha: false, includeHashSign: true, toUpperCase: false),
-              '#$string'.toLowerCase()),
+          () => expect(colorToHex(color, enableAlpha: false, includeHashSign: true, toUpperCase: false), '#$string'.toLowerCase()),
         ));
 
     colorsMap.forEach((color, string) => test(
